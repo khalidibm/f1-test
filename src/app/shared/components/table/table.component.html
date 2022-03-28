@@ -1,0 +1,78 @@
+
+
+<ng-template #StringColumn let-value>{{ value }}</ng-template>
+
+<ng-template #DateColumn let-value>{{value | date: 'yyyy MMM dd'}}</ng-template>
+
+<ng-template #TimeColumn let-value>{{ value | date: 'h:mm' }}</ng-template>
+
+<ng-template #HyperLinkColumn let-value><a (click)="onHyperLinkClicked(value)" class="hyperLink">{{value.value}}</a></ng-template>
+
+<ng-template #AutoNumberColumn let-value>{{ value + 1 }}</ng-template>
+<ng-template #NumberColumn let-value><b>{{ value }}</b></ng-template>
+
+<div class="warp">
+<!-- 
+    <span scope="col" *ngFor="let col of DataSet?.schema">
+        {{ col?.title }}
+    </span> -->
+
+    <div class="driver">
+
+        <span *ngFor="let row of data; let i = index">
+            <span *ngFor="let col of DataSet?.schema">
+                <div [ngSwitch]="col.type" *ngIf="row[SpecialField]">
+                    <div *ngSwitchCase="'String'">
+                        <img src="../../../../assets/drivers/{{row[col.field]}}.png" alt="">
+                        <ng-container *ngTemplateOutlet="
+                            StringColumn;
+                            context: { $implicit: row[col.field] }">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchCase="'HyperLink'">
+                        <ng-container *ngTemplateOutlet="
+                            HyperLinkColumn;
+                            context: {
+                                $implicit: {
+                                value: row[col.field],
+                                rowIndex: i,
+                                column: col
+                                }
+                            } ">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchCase="'AutoNumber'">
+                        <ng-container *ngTemplateOutlet="
+                            AutoNumberColumn;
+                            context: { $implicit: i }">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchCase="'Date'">
+                        <ng-container *ngTemplateOutlet="
+                            DateColumn;
+                            context: { $implicit: row[col.field] }">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchCase="'Time'">
+                        <ng-container *ngTemplateOutlet="
+                            TimeColumn;
+                            context: { $implicit: row[col.field] }">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchCase="'Number'">
+                        <ng-container *ngTemplateOutlet="
+                            NumberColumn;
+                            context: { $implicit: row[col.field] }">
+                        </ng-container>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <ng-container *ngTemplateOutlet="
+                            StringColumn;
+                            context: { $implicit: row[col.field] }">
+                        </ng-container>
+                    </div>
+                </div>
+            </span>
+        </span>
+    </div>
+</div>

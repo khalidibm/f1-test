@@ -1,0 +1,27 @@
+// 1. Configuration
+@import
+  'config/colors',
+  'config/mixins',
+  "config/body";
+
+// 2. Base stuff
+@import
+  'base/reset',
+  'base/fonts',
+  'base/typography';
+
+// 3. Layout-related sections
+@import
+  'layout/dropdown',
+  'layout/navbar';
+
+// 4. Page-specific styles
+@import
+  'page/home';
+
+
+// 5. Components
+@import
+'component/table',
+'component/loader',
+'component/driver-standing';

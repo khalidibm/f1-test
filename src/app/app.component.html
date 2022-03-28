@@ -1,0 +1,14 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" 
+size = "default"
+color = "#ff1801" 
+type = "ball-elastic-dots" 
+[fullScreen] = "true">
+<img src="../assets/icons/F1.svg" alt="f1-logo" class="loader-logo">
+</ngx-spinner>
+<div class="bg-dark main-nav-bar">
+  <div class="container">
+    <champ-navbar (SeasonChanged)="onSeasonChanged($event)"></champ-navbar>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
